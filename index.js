@@ -32,14 +32,14 @@ const { EEXIST } = require('constants');
 // amberjain1234
 // 'mongodbcloudpass'
 // Use this when not connected to Heroku
-const MONGODB_URI = "mongodb+srv://amberjain1234:mongodbcloudpass@icrowdtaskdb.t8nty.mongodb.net/<dbname>?retryWrites=true&w=majority"
+//const MONGODB_URI = "mongodb+srv://amberjain1234:mongodbcloudpass@icrowdtaskdb.t8nty.mongodb.net/<dbname>?retryWrites=true&w=majority"
 
 // //Database connection using mongoose
 const mongoose = require("mongoose");
 // This keeps away the warning
 mongoose.set('useCreateIndex', true);
 // This craetes and connects to the db
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/iCrowdTaskDB", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb://localhost:27017/iCrowdTaskDB", { useNewUrlParser: true, useUnifiedTopology: true })
 
 let db = mongoose.connection;
 
