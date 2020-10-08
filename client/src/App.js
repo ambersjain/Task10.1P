@@ -18,10 +18,12 @@ document.head.appendChild(styleLink);
 const App = () => {
   const [radio, setRadio] = useState('');
   const [option, setOption] = useState('');
+
   const handleSetRadio = (event) => {
     const value = event.target.value;
     setRadio(value);
   }
+  //This function writes the main radios to the sibling (<TaskType> --> <TaskSetup>)
   const handleSetOption = (event) => {
     const name = event.target.name;
     if (name === 'choice') {
@@ -88,13 +90,10 @@ const App = () => {
         value1="choice"
         value2="decision"
         value3="sentence"
-    />
+      />
       <TaskDescription
         onChange={handleChange} />
-      <h1>{stateVar.title}</h1>
-      <h1>{stateVar.description}</h1>
-      <h1>{stateVar.expiry_date}</h1>
-      <TaskSetup option={option} onChange={handleChange}/>
+      <TaskSetup option={option} onChange={handleChange} />
       <WorkerRequirement onChange={handleChange} />
       <button onClick={handleSubmit} className="btn btn-outline-success button-pos btn-md" type="submit" >Save</button>
     </div>
