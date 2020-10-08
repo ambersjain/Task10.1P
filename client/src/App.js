@@ -17,7 +17,7 @@ document.head.appendChild(styleLink);
 
 const App = () => {
   const [radio, setRadio] = useState('');
-  const [option, setOption] = useState('amber');
+  const [option, setOption] = useState('');
   const handleSetRadio = (event) => {
     const value = event.target.value;
     setRadio(value);
@@ -33,25 +33,70 @@ const App = () => {
     }
 
   }
+  const [stateVar, setStateVar] = useState({
+    title: '',
+    description: '',
+    expiry_date: '',
+    master_worker: '',
+    reward_per_response: '',
+    number_of_workers: '',
+    worker_choice: '',
+    worker_decision: '',
+    worker_sentence: ''
+  })
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setStateVar((preValue) => {
+      return {
+        ...preValue,
+        [name]: value
+      }
+    })
+  }
+
+  const handleSubmit = () => {
+    fetch('http://localhost:8080/reqtask', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        task_type: radio,
+        title: stateVar.title,
+        description: stateVar.description,
+        worker_choice: stateVar.worker_choice,
+        worker_decision: stateVar.worker_decision,
+        worker_sentence: stateVar.worker_sentence,
+        date: stateVar.expiry_date,
+        require_worker: stateVar.master_worker,
+        reward_per_response: stateVar.reward_per_response,
+        number_of_workers: stateVar.number_of_workers,
+      })
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => {
+        console.log("Error:" + err)
+      })
+  }
   return (
     <div className="container-fluid">
       <NavbarBoot />
       <TaskType
-        name1='choice'
-        name2='decision'
-        name3='sentence'
-        type='radio'
-        value1='choice'
-        value2='decision'
-        value3='sentence'
-        onChange = {handleSetRadio}
-        onChange2 = {handleSetOption}
-        radio = {radio}
-      />
-      <TaskDescription />
-      <TaskSetup option={option}/>
-      <WorkerRequirement />
-      <button className="btn btn-outline-success button-pos btn-md" type="submit" >Save</button>
+        onChange={handleSetRadio}
+        onChange2={handleSetOption}
+        radio={radio}
+        value1="choice"
+        value2="decision"
+        value3="sentence"
+    />
+      <TaskDescription
+        onChange={handleChange} />
+      <h1>{stateVar.title}</h1>
+      <h1>{stateVar.description}</h1>
+      <h1>{stateVar.expiry_date}</h1>
+      <TaskSetup option={option} onChange={handleChange}/>
+      <WorkerRequirement onChange={handleChange} />
+      <button onClick={handleSubmit} className="btn btn-outline-success button-pos btn-md" type="submit" >Save</button>
     </div>
   );
 }

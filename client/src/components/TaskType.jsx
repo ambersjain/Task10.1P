@@ -7,8 +7,8 @@ const TaskType = (props) => {
             <legend className="col-form-label col-sm-2 pt-0">Select Task Type</legend>
             <div className="form-check form-check-inline ml-3">
                 <input className="form-check-input"
-                    type={props.type}
-                    name={props.name1}
+                    type="radio"
+                    name="choice"
                     value={props.value1}
                     checked={props.radio === props.value1}
                     onChange={props.onChange}
@@ -18,8 +18,8 @@ const TaskType = (props) => {
             </div>
             <div className="form-check form-check-inline ml-3">
                 <input className="form-check-input"
-                    type={props.type}
-                    name={props.name2}
+                    type="radio"
+                    name="decision"
                     value={props.value2}
                     checked={props.radio === props.value2}
                     onChange={props.onChange}
@@ -29,8 +29,8 @@ const TaskType = (props) => {
             </div>
             <div className="form-check form-check-inline ml-3">
                 <input className="form-check-input"
-                    type={props.type}
-                    name={props.name3}
+                    type="radio"
+                    name="sentence"
                     value={props.value3}
                     checked={props.radio === props.value3}
                     onChange={props.onChange}

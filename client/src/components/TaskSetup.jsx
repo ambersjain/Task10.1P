@@ -6,11 +6,11 @@ function Decision(props) {
         return <div className="form-group row">
             <label className="col-form-label col-sm-2">Do you understand Data Structures?</label>
             <div className="form-check form-check-inline ml-3">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                <input className="form-check-input" type="radio" name="worker_decision" id="inlineRadio1" value="Yes" onChange={props.onChange} />
                 <label className="form-check-label">Yes</label>
             </div>
             <div className="form-check form-check-inline ml-3">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                <input className="form-check-input" type="radio" name="worker_decision" id="inlineRadio1" value="No" onChange={props.onChange} />
                 <label className="form-check-label">No</label>
             </div>
         </div>;
@@ -23,7 +23,7 @@ function Sentence(props) {
         return <div className="form-group row">
             <label className="col-sm-2 col-form-label">Tell one difference between the Map and Object?</label>
             <div className="col-sm-5">
-                <input type="text" className="form-control" id="inputEmail3" placeholder="Start typing.." />
+                <input type="text" name="worker_sentence" className="form-control" placeholder="Start typing.." onChange={props.onChange} />
             </div>
         </div>;
     }
@@ -35,15 +35,15 @@ function Choice(props) {
         return <div className="form-group row">
             <label className="col-form-label col-sm-2">As a worker, what are you an expert in?</label>
             <div className="form-check form-check-inline ml-3">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                <input className="form-check-input" type="radio" name="worker_choice" value="C++" onChange={props.onChange}/>
                 <label className="form-check-label">C++</label>
             </div>
             <div className="form-check form-check-inline ml-3">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                <input className="form-check-input" type="radio" name="worker_choice" value="Java" onChange={props.onChange} />
                 <label className="form-check-label">Java</label>
             </div>
             <div className="form-check form-check-inline ml-3">
-                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                <input className="form-check-input" type="radio" name="worker_choice" value="Python" onChange={props.onChange} />
                 <label className="form-check-label">Python</label>
             </div>
         </div>
@@ -58,9 +58,9 @@ const TaskSetup = (props) => {
         <div className="form">
             <h1>{props.radio}</h1>
             <div className="form">
-                <Choice qType={props.option} />
-                <Decision qType={props.option} />
-                <Sentence qType={props.option} />
+                <Choice qType={props.option} onChange={props.onChange} />
+                <Decision qType={props.option} onChange={props.onChange}  />
+                <Sentence qType={props.option} onChange={props.onChange} />
             </div>
         </div>
     </div>)

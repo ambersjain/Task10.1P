@@ -1,10 +1,12 @@
 const express = require('express');
+const cors = require("cors");
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 8080;
 //const passport = require('passport');
 //const localPassportConfig = require('./config/local-passport-config');
 const passportConfig = require('./config/passport-config');
+
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -25,8 +27,10 @@ const userRoutes = require('./routes/user-routes');
 //getting the profile routes
 const profileRoutes = require('./routes/profile-routes');
 
-const { EEXIST } = require('constants');
+//getting the Requester task routes
+const reqTaskRoutes = require('./routes/reqTask-routes');
 
+const { EEXIST } = require('constants');
 
 // atlas details
 // amberjain1234
@@ -55,6 +59,8 @@ db.once('open', function () {
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json());
 
 //use Google auth in app
 /*
@@ -89,6 +95,9 @@ app.use(userRoutes);
 
 // Use the profile routes
 app.use('/profile', profileRoutes);
+
+// Use the reqTask routes
+app.use(reqTaskRoutes);
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
